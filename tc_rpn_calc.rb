@@ -32,10 +32,20 @@ class TestRpnCalc < Test::Unit::TestCase
 
    def test_divide
       calc = RpnCalc.new()
-      calc.push(12)
-      calc.push(6)
+      calc.push('12')
+      calc.push('6')
       calc.push('/')
       assert_equal(2, calc.pop(), "Divide yielded incorrect result")
+   end
+
+   def test_multiple_operations
+      calc = RpnCalc.new()
+      calc.push('2')
+      calc.push('9')
+      calc.push('3')
+      calc.push('+')
+      calc.push('*')
+      assert_equal(24, calc.pop(), "Multiple operations yielded incorrect result")
    end
 
    #It should support negative and decimal numbers, 
@@ -52,7 +62,18 @@ class TestRpnCalc < Test::Unit::TestCase
 
    #The calculator should not allow invalid or undefined behavior.
    def test_divide_by_zero
-      assert(false)   
+      calc = RpnCalc.new()
+      calc.push('1')
+      calc.push('0')
+      calc.push('/')
+      assert(false) #FIXME: figure out how test that divide by zero fails   
+   end
+
+   def test_arity
+      calc = RpnCalc.new()
+      calc.push('7')
+      calc.push('+')
+      assert(false) #FIXME: figure out how to confirm this fails
    end
 
    #The calculator should exit when it receives a q command 
