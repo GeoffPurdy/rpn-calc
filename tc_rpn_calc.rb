@@ -12,7 +12,10 @@ class TestRpnCalc < Test::Unit::TestCase
    def test_numeric
       assert_equal( true, RpnCalc.new().isNumeric?('0'), "Failed to identify integer as numeric")
       assert_equal( true, RpnCalc.new().isNumeric?('0.0'), "Failed to identify float as numeric")
+      assert_equal( true, RpnCalc.new().isNumeric?('-0'), "Failed to identify negative integer as numeric")
+      assert_equal( true, RpnCalc.new().isNumeric?('-0.0'), "Failed to identify negative float as numeric")
       assert_equal( false, RpnCalc.new().isNumeric?('A'), "Misidentified non decimal input as numeric")
+      assert_equal( false, RpnCalc.new().isNumeric?('-E'), "Misidentified negative non-decimal input as numeric")
       assert_equal( false, RpnCalc.new().isNumeric?(nil), "Misidentified nil as numeric")
    end
 
