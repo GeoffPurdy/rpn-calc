@@ -7,10 +7,10 @@ class RpnCalc
       @stack = []
    end
 
-   def read
+   def push(text)
    end
 
-   def write
+   def pop()
    end
 
    def isNumeric?(text)
