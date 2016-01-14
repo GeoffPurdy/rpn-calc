@@ -14,6 +14,7 @@ class RpnCalc
    end
 
    def isNumeric?(text)
+      return true if Float(text) rescue false
    end
 
    def isOperator(text)
