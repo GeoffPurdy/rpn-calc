@@ -1,5 +1,6 @@
 # rpn-calc
 RPN Calculator
+** operates on integers and floating point values in decimal notation **
 
 Please implement a reverse polish notation (RPN) calculator.  It can be written
 in any language you choose. It will be evaluated based on its
