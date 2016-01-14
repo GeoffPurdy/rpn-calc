@@ -1,5 +1,7 @@
-
 class RpnCalc
+   EOF = nil
+   QUIT_SIGNALS = [EOF, 'q']
+   OPERATORS    = ['+', '-', '*', '/']
 
    def initialize
       @stack = []
@@ -18,6 +20,7 @@ class RpnCalc
    end
 
    def isQuit?(text)
+      return QUIT_SIGNALS.include?(text)
    end
 
 end
