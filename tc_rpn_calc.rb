@@ -9,6 +9,11 @@ class TestRpnCalc < Test::Unit::TestCase
 
    #It should support negative and decimal numbers, 
    #and should not have arbitrary limits on the number of operations.
+   def test_numeric
+      assert_equal( true, RpnCalc.new().isNumeric?('0'), "Failed to identify integer as numeric")
+      assert_equal( true, RpnCalc.new().isNumeric?('0.0'), "Failed to identify float as numeric")
+      assert_equal( false, RpnCalc.new().isNumeric?('A'), "Misidentified non decimal input as numeric")
+   end
 
    #The calculator should not allow invalid or undefined behavior.
 
