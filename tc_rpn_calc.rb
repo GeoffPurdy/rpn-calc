@@ -8,44 +8,44 @@ class TestRpnCalc < Test::Unit::TestCase
    #It should implement the four standard arithmetic operators.
    def test_add
       calc = RpnCalc.new()
-      calc.push('1')
-      calc.push('2')
-      calc.push('+')
-      assert_equal(3, calc.pop(), "Add operation yielded incorrect result")
+      calc.enter('1')
+      calc.enter('2')
+      calc.enter('+')
+      assert_equal(3, calc.display(), "Add operation yielded incorrect result")
    end
 
    def test_subtract
       calc = RpnCalc.new()
-      calc.push('3')
-      calc.push('2')
-      calc.push('-')
-      assert_equal(1, calc.pop(), "Subtract yielded incorrect result")
+      calc.enter('3')
+      calc.enter('2')
+      calc.enter('-')
+      assert_equal(1, calc.display(), "Subtract yielded incorrect result")
    end
 
    def test_multiply
       calc = RpnCalc.new()
-      calc.push('4')
-      calc.push('3')
-      calc.push('*')
-      assert_equal(12, calc.pop(), "Multiply yielded incorrect result")
+      calc.enter('4')
+      calc.enter('3')
+      calc.enter('*')
+      assert_equal(12, calc.display(), "Multiply yielded incorrect result")
    end
 
    def test_divide
       calc = RpnCalc.new()
-      calc.push('12')
-      calc.push('6')
-      calc.push('/')
-      assert_equal(2, calc.pop(), "Divide yielded incorrect result")
+      calc.enter('12')
+      calc.enter('6')
+      calc.enter('/')
+      assert_equal(2, calc.display(), "Divide yielded incorrect result")
    end
 
    def test_multiple_operations
       calc = RpnCalc.new()
-      calc.push('2')
-      calc.push('9')
-      calc.push('3')
-      calc.push('+')
-      calc.push('*')
-      assert_equal(24, calc.pop(), "Multiple operations yielded incorrect result")
+      calc.enter('2')
+      calc.enter('9')
+      calc.enter('3')
+      calc.enter('+')
+      calc.enter('*')
+      assert_equal(24, calc.display(), "Multiple operations yielded incorrect result")
    end
 
    #It should support negative and decimal numbers, 
@@ -63,16 +63,16 @@ class TestRpnCalc < Test::Unit::TestCase
    #The calculator should not allow invalid or undefined behavior.
    def test_divide_by_zero
       calc = RpnCalc.new()
-      calc.push('1')
-      calc.push('0')
-      calc.push('/')
+      calc.enter('1')
+      calc.enter('0')
+      calc.enter('/')
       assert(false) #FIXME: figure out how test that divide by zero fails   
    end
 
    def test_arity
       calc = RpnCalc.new()
-      calc.push('7')
-      calc.push('+')
+      calc.enter('7')
+      calc.enter('+')
       assert(false) #FIXME: figure out how to confirm this fails
    end
 
@@ -82,9 +82,9 @@ class TestRpnCalc < Test::Unit::TestCase
 
    def test_float_overflow
       calc = RpnCalc.new()
-      calc.push(Float::MAX)
-      calc.push('1')
-      calc.push('+')
+      calc.enter(Float::MAX)
+      calc.enter('1')
+      calc.enter('+')
       assert(false)
    end
 
