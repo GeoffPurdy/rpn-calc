@@ -8,41 +8,41 @@ class TestRpnCalc < Test::Unit::TestCase
    #It should implement the four standard arithmetic operators.
    def test_add
       calc = RpnCalc.new()
-      calc.enter('1')
-      calc.enter('2')
+      calc.enter(1)
+      calc.enter(2)
       calc.enter('+')
       assert_equal(3, calc.display(), "Add operation yielded incorrect result")
    end
 
    def test_subtract
       calc = RpnCalc.new()
-      calc.enter('3')
-      calc.enter('2')
+      calc.enter(3)
+      calc.enter(2)
       calc.enter('-')
       assert_equal(1, calc.display(), "Subtract yielded incorrect result")
    end
 
    def test_multiply
       calc = RpnCalc.new()
-      calc.enter('4')
-      calc.enter('3')
+      calc.enter(4)
+      calc.enter(3)
       calc.enter('*')
       assert_equal(12, calc.display(), "Multiply yielded incorrect result")
    end
 
    def test_divide
       calc = RpnCalc.new()
-      calc.enter('12')
-      calc.enter('6')
+      calc.enter(12)
+      calc.enter(6)
       calc.enter('/')
       assert_equal(2, calc.display(), "Divide yielded incorrect result")
    end
 
    def test_multiple_operations
       calc = RpnCalc.new()
-      calc.enter('2')
-      calc.enter('9')
-      calc.enter('3')
+      calc.enter(2)
+      calc.enter(9)
+      calc.enter(3)
       calc.enter('+')
       calc.enter('*')
       assert_equal(24, calc.display(), "Multiple operations yielded incorrect result")
@@ -63,15 +63,15 @@ class TestRpnCalc < Test::Unit::TestCase
    #The calculator should not allow invalid or undefined behavior.
    def test_divide_by_zero
       calc = RpnCalc.new()
-      calc.enter('1')
-      calc.enter('0')
+      calc.enter(1)
+      calc.enter(0)
       calc.enter('/')
       assert(false) #FIXME: figure out how test that divide by zero fails   
    end
 
    def test_arity
       calc = RpnCalc.new()
-      calc.enter('7')
+      calc.enter(7)
       calc.enter('+')
       assert(false) #FIXME: figure out how to confirm this fails
    end
@@ -83,7 +83,7 @@ class TestRpnCalc < Test::Unit::TestCase
    def test_float_overflow
       calc = RpnCalc.new()
       calc.enter(Float::MAX)
-      calc.enter('1')
+      calc.enter(1)
       calc.enter('+')
       assert(false)
    end
@@ -106,6 +106,6 @@ class TestRpnCalc < Test::Unit::TestCase
    def test_quit
       assert_equal(true, RpnCalc.new().isQuit?('q'), "Failed to quit on q" )
       assert_equal(true, RpnCalc.new().isQuit?(nil), "Failed to quit on EOF")
-      assert_equal(false, RpnCalc.new().isQuit?('0'), "Quit when should not")
+      assert_equal(false, RpnCalc.new().isQuit?(0), "Quit when should not")
    end
 end
