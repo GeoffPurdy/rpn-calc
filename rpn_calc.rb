@@ -11,14 +11,11 @@ class RpnCalc
    def enter(text)
       if( isNumeric?(text) )
          @stack.push(text)
-         puts(@stack.to_s)
       elsif( isOperator?(text) )
-         puts(@stack.to_s)
          operand1 = @stack.pop
          operand2 = @stack.pop 
-         result = operand1.send(text, operand2)
+         result = operand2.send(text, operand1)
          @stack.push(result)
-         puts(@stack.to_s)
       elsif(isQuit?(text))
          exit #FIXME: move this to UI 
       else
@@ -31,7 +28,6 @@ class RpnCalc
    end
 
    def isNumeric?(text)
-      puts( "isNumeric?(" + text + ")" )
       return true if Float(text) rescue false
    end
 
