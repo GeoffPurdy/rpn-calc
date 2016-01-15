@@ -76,6 +76,31 @@ class TestRpnCalc < Test::Unit::TestCase
       assert(false) #FIXME: figure out how to confirm this fails
    end
 
+   def test_integer_overflow
+      assert(false)
+   end
+
+   def test_float_overflow
+      calc = RpnCalc.new()
+      calc.push(Float::MAX)
+      calc.push('1')
+      calc.push('+')
+      assert(false)
+   end
+
+   def test_integer_operands
+      assert(false)
+   end
+
+   def test_float_operands
+      assert(false)
+   end
+
+   def test_mixed_operands
+      assert(false)
+   end
+
+
    #The calculator should exit when it receives a q command 
    #or an end of input indicator (EOF).
    def test_quit
