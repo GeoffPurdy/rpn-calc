@@ -75,7 +75,7 @@ class TestRpnCalc < Test::Unit::TestCase
       calc.enter(1)
       calc.enter(0)
       calc.enter('/')
-      assert(false) #FIXME: figure out how test that divide by zero fails   
+      assert_raise(Exception)   
    end
 
    def test_arity
