@@ -20,7 +20,7 @@ class RpnCalc
       elsif( isOperator?(input) )
          calculate(input)
       else
-         raise ArgumentError, "Input is neither a valid operator nor a decimal number", caller 
+         raise ArgumentError 
       end
    end
 
@@ -28,7 +28,7 @@ class RpnCalc
       operand1, operand2 = @stack.pop(2)
       raise ArgumentError if (operand1.nil? || operand2.nil?)
       raise ZeroDivisionError if (operand1.to_f.zero? && operator == '/')
-      result = operand1.send(OPERATOR_METHOD[operator], operand2)
+      result = operand1.to_f.send(OPERATOR_METHOD[operator], operand2.to_f)
       @stack.push(result)
    end
 
