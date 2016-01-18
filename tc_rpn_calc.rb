@@ -53,7 +53,7 @@ class TestRpnCalc < Test::Unit::TestCase
       calc.enter(3)
       calc.enter(2)
       calc.enter('/')
-      assert_equal(1.5, calc.display, "Integer division yielded incorrect result")
+      assert_equal(1.5, calc.display(), "Integer division yielded incorrect result")
    end
       
 
@@ -88,35 +88,43 @@ class TestRpnCalc < Test::Unit::TestCase
    end
 
    def test_integer_overflow
-      assert(false)
+      large_int = Integer::MAX
+      calc.enter(large_int)
+      calc.enter(1)
+      calc.enter('+')
+      assert(calc.display() > large_number)
    end
 
    def test_float_overflow
       calc = RpnCalc.new()
-      calc.enter(Float::MAX)
+      large_float = Float::MAX
+      calc.enter(large_float)
       calc.enter(1)
       calc.enter('+')
-      assert(false)
+      assert(calc.display() > large_float)
    end
 
-   def test_integer_operands
-      assert(false)
+   def test_integer_division_result_type
+      calc = RpnCalc.new()
+      calc.enter(8)
+      calc.enter(4)
+      calc.enter('/')
+      assert(calc.display().integer?)
    end
 
-   def test_float_operands
-      assert(false)
+   def test_float_division_result_type
+      calc = RpnCalc.new()
+      calc.enter(9.0)
+      calc.enter(2.0)
+      calc.enter('/')
+      assert(calc.display().is_a?(Numeric) && !calc.display().integer?)
    end
 
-   def test_mixed_operands
-      assert(false)
-   end
-
-
-   #The calculator should exit when it receives a q command 
-   #or an end of input indicator (EOF).
-   def test_quit
-      assert_equal(true, RpnCalc.new().isQuit?('q'), "Failed to quit on q" )
-      assert_equal(true, RpnCalc.new().isQuit?(nil), "Failed to quit on EOF")
-      assert_equal(false, RpnCalc.new().isQuit?(0), "Quit when should not")
+   def test_mixed_operand_result_type
+      calc = RpnCalc.new()
+      calc.enter(5.0)
+      calc.enter(3)
+      calc.enter('*')
+      assert(calc.display().is_a?(Numeric) && !calc.display().integer?)
    end
 end
