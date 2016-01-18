@@ -2,7 +2,7 @@ class RpnCalc
    EOF = nil
    ERROR_MSG = 'E' * 10 # like a handheld calculator
    QUIT_SIGNALS = [EOF, 'q']
-   OPERATORS    = ['+', '-', '*', '/']
+   OPERATOR_METHOD = Hash["+" => "+", "-" => "-", "*" => "*", "/" => "fdiv"]
 
    def initialize
       @stack = []
@@ -14,13 +14,17 @@ class RpnCalc
       elsif( isOperator?(text) )
          operand1 = @stack.pop
          operand2 = @stack.pop 
-         result = operand2.send(text, operand1)
+         result = operand2.send(OPERATOR_METHOD[text], operand1)
          @stack.push(result)
       elsif(isQuit?(text))
          exit #FIXME: move this to UI 
       else
          abort 
       end
+   end
+
+   def exit_on_error()
+      return ERROR_MSG
    end
 
    def display()
@@ -32,7 +36,7 @@ class RpnCalc
    end
 
    def isOperator?(text)
-      return OPERATORS.include?(text)
+      return OPERATOR_METHOD.include?(text)
    end
 
    def isQuit?(text)

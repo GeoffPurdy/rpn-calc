@@ -48,6 +48,15 @@ class TestRpnCalc < Test::Unit::TestCase
       assert_equal(24, calc.display(), "Multiple operations yielded incorrect result")
    end
 
+   def test_integer_division
+      calc = RpnCalc.new()
+      calc.enter(3)
+      calc.enter(2)
+      calc.enter('/')
+      assert_equal(1.5, calc.display, "Integer division yielded incorrect result")
+   end
+      
+
    #It should support negative and decimal numbers, 
    #and should not have arbitrary limits on the number of operations.
    def test_numeric
