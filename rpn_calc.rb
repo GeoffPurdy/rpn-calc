@@ -25,15 +25,10 @@ class RpnCalc
    end
 
    def calculate(operator)
-      begin
-         operand1 = @stack.pop
-         operand2 = @stack.pop
-      rescue StopIteration
-         raise ArgumentError, "Incorrect arity for operation.  Too few operands.", caller
-      else
-         raise ZeroDivisionError if (operand1.to_f.zero? && operator == '/')
-      end
-      result = operand2.send(OPERATOR_METHOD[operator], operand1)
+      operand1, operand2 = @stack.pop(2)
+      raise ArgumentError if (operand1.nil? || operand2.nil?)
+      raise ZeroDivisionError if (operand1.to_f.zero? && operator == '/')
+      result = operand1.send(OPERATOR_METHOD[operator], operand2)
       @stack.push(result)
    end
 

@@ -74,15 +74,17 @@ class TestRpnCalc < Test::Unit::TestCase
       calc = RpnCalc.new()
       calc.enter(1)
       calc.enter(0)
-      calc.enter('/')
-      assert_raise(Exception)   
+      assert_raise(ZeroDivisionError) do 
+         calc.enter('/')
+      end
    end
 
    def test_arity
       calc = RpnCalc.new()
       calc.enter(7)
-      calc.enter('+')
-      assert(false) #FIXME: figure out how to confirm this fails
+      assert_raise(ArgumentError) do
+         calc.enter('+')
+      end
    end
 
    def test_integer_overflow
