@@ -89,6 +89,7 @@ class TestRpnCalc < Test::Unit::TestCase
       calc = RpnCalc.new()
       calc.enter(1)
       calc.enter(0)
+      puts calc.stackdump()
       assert_raise(ZeroDivisionError) do 
          calc.enter('/')
       end

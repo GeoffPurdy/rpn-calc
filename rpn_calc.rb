@@ -22,7 +22,7 @@ class RpnCalc
    def calculate(operator)
       operand1, operand2 = @stack.pop(2)
       raise ArgumentError if (operand1.nil? || operand2.nil?)
-      raise ZeroDivisionError if (operand1.to_f.zero? && operator == '/')
+      raise ZeroDivisionError if (operand2.to_f.zero? && operator == '/')
       result = operand1.to_f.send(OPERATOR_METHOD[operator], operand2.to_f)
       @stack.push(result)
    end
