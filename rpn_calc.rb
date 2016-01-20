@@ -1,11 +1,6 @@
 class RpnCalc
-   # RpnCalc takes input from STDIN
-   #    in the format:
-   #    operand [enter]
-   #    operand [enter]
-   #    operator [enter]
-   #
-   #    outputs result of calculation
+   # RPN Calculator - operates on values in Reverse Polish Notation format
+   #   see - https://en.wikipedia.org/wiki/Reverse_Polish_notation
 
    # map operators to the actual methods they call 
    OPERATOR_METHOD = Hash["+" => "+", "-" => "-", "*" => "*", "/" => "fdiv"]
@@ -20,6 +15,7 @@ class RpnCalc
    end
 
    def enter(input)
+      # input a value or operator into the calculator
       if( isNumeric?(input) )
          save(input.to_f)
       elsif( isOperator?(input) )
@@ -30,10 +26,12 @@ class RpnCalc
    end
 
    def calculate(operator)
+      # perform calculation when operator encountered
+      # put result back on stack
       operand1, operand2 = @stack.pop(2)
       raise ArgumentError if (operand1.nil? || operand2.nil?)
-      raise ZeroDivisionError if (operand2.to_f.zero? && operator == '/')
-      result = operand1.to_f.send(OPERATOR_METHOD[operator], operand2.to_f)
+      raise ZeroDivisionError if (operand2.zero? && operator == '/')
+      result = operand1.send(OPERATOR_METHOD[operator], operand2)
       @stack.push(result)
    end
 
