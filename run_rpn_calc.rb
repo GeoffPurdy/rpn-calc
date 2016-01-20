@@ -13,7 +13,6 @@ STDIN.each_line do |input_line|
    begin
       calc.enter(input_line.chomp)
       puts sprintf("%g", calc.display())
-      puts "=> " + calc.stackdump()
       print PROMPT
    rescue
       # calculator is in an invalid state 

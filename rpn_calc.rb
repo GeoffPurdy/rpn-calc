@@ -1,4 +1,6 @@
 class RpnCalc
+
+   # map operators to the actual methods they call 
    OPERATOR_METHOD = Hash["+" => "+", "-" => "-", "*" => "*", "/" => "fdiv"]
 
    def initialize
