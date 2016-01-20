@@ -6,17 +6,12 @@ class RpnCalc
    end
 
    def display()
-      begin
-         display_text = @stack.to_enum.peek()
-      rescue StopIteration
-         display_text = 0 # show zero when clear
-      end
-      return display_text
+      return @stack.last || 0
    end
 
    def enter(input)
       if( isNumeric?(input) )
-         save(input)
+         save(input.to_f)
       elsif( isOperator?(input) )
          calculate(input)
       else
@@ -32,6 +27,10 @@ class RpnCalc
       @stack.push(result)
    end
 
+   def stackdump()
+      return @stack.to_s
+   end
+   
    def save(value)
        @stack.push(value)
    end

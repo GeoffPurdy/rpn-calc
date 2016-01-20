@@ -12,7 +12,8 @@ STDIN.each_line do |input_line|
    exit if (input_line.nil? || input_line == QUIT_SIGNAL)
    begin
       calc.enter(input_line.chomp)
-      puts calc.display
+      puts sprintf("%g", calc.display())
+      puts "=> " + calc.stackdump()
       print PROMPT
    rescue
       # calculator is in an invalid state 

@@ -6,28 +6,56 @@ class TestRpnCalc < Test::Unit::TestCase
    #unless the language makes that impossible.
 
    #It should implement the four standard arithmetic operators.
-   def test_add
+   def test_integer_add
       calc = RpnCalc.new()
       calc.enter(1)
       calc.enter(2)
       calc.enter('+')
-      assert_equal(3, calc.display(), "Add operation yielded incorrect result")
+      assert_equal(3, calc.display())
+      assert(calc.display().integer?)
    end
 
-   def test_subtract
+   def test_float_add
+      calc = RpnCalc.new()
+      calc.enter(1.2)
+      calc.enter(2.5)
+      calc.enter('+')
+      assert_equal(3.7, calc.display())
+   end
+
+   def test_integer_subtract
       calc = RpnCalc.new()
       calc.enter(3)
       calc.enter(2)
       calc.enter('-')
-      assert_equal(1, calc.display(), "Subtract yielded incorrect result")
+      assert_equal(1, calc.display())
+      assert(calc.display().integer?)
    end
 
-   def test_multiply
+   def test_float_subtract
+      calc = RpnCalc.new()
+      calc.enter(3.3)
+      calc.enter(2.2)
+      calc.enter('-')
+      assert_equal(1.1, calc.display().round(2) ) #float arithmetic imprecise
+   end
+
+   def test_integer_multiply
       calc = RpnCalc.new()
       calc.enter(4)
       calc.enter(3)
       calc.enter('*')
-      assert_equal(12, calc.display(), "Multiply yielded incorrect result")
+      assert_equal(12, calc.display())
+      assert(calc.display().integer?)
+   end
+
+   def test_float_multiply
+      calc = RpnCalc.new()
+      calc.enter(4)
+      calc.enter(3.0)
+      calc.enter('*')
+      assert_equal(12.0, calc.display())
+      assert(calc.display().is_a?(Numeric) && !calc.display().integer?)
    end
 
    def test_divide
@@ -35,7 +63,8 @@ class TestRpnCalc < Test::Unit::TestCase
       calc.enter(12)
       calc.enter(6)
       calc.enter('/')
-      assert_equal(2, calc.display(), "Divide yielded incorrect result")
+      assert_equal(2.0, calc.display())
+      assert(calc.display().is_a?(Numeric) && !calc.display().integer?)
    end
 
    def test_multiple_operations
@@ -45,17 +74,8 @@ class TestRpnCalc < Test::Unit::TestCase
       calc.enter(3)
       calc.enter('+')
       calc.enter('*')
-      assert_equal(24, calc.display(), "Multiple operations yielded incorrect result")
+      assert_equal(24, calc.display())
    end
-
-   def test_integer_division
-      calc = RpnCalc.new()
-      calc.enter(3)
-      calc.enter(2)
-      calc.enter('/')
-      assert_equal(1.5, calc.display(), "Integer division yielded incorrect result")
-   end
-      
 
    #It should support negative and decimal numbers, 
    #and should not have arbitrary limits on the number of operations.
@@ -87,44 +107,4 @@ class TestRpnCalc < Test::Unit::TestCase
       end
    end
 
-   def test_integer_overflow
-      large_int = Integer::MAX
-      calc.enter(large_int)
-      calc.enter(1)
-      calc.enter('+')
-      assert(calc.display() > large_number)
-   end
-
-   def test_float_overflow
-      calc = RpnCalc.new()
-      large_float = Float::MAX
-      calc.enter(large_float)
-      calc.enter(1)
-      calc.enter('+')
-      assert(calc.display() > large_float)
-   end
-
-   def test_integer_division_result_type
-      calc = RpnCalc.new()
-      calc.enter(8)
-      calc.enter(4)
-      calc.enter('/')
-      assert(calc.display().integer?)
-   end
-
-   def test_float_division_result_type
-      calc = RpnCalc.new()
-      calc.enter(9.0)
-      calc.enter(2.0)
-      calc.enter('/')
-      assert(calc.display().is_a?(Numeric) && !calc.display().integer?)
-   end
-
-   def test_mixed_operand_result_type
-      calc = RpnCalc.new()
-      calc.enter(5.0)
-      calc.enter(3)
-      calc.enter('*')
-      assert(calc.display().is_a?(Numeric) && !calc.display().integer?)
-   end
 end
