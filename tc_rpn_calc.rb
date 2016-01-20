@@ -12,7 +12,6 @@ class TestRpnCalc < Test::Unit::TestCase
       calc.enter(2)
       calc.enter('+')
       assert_equal(3, calc.display())
-      assert(calc.display().integer?)
    end
 
    def test_float_add
@@ -29,7 +28,6 @@ class TestRpnCalc < Test::Unit::TestCase
       calc.enter(2)
       calc.enter('-')
       assert_equal(1, calc.display())
-      assert(calc.display().integer?)
    end
 
    def test_float_subtract
@@ -46,7 +44,6 @@ class TestRpnCalc < Test::Unit::TestCase
       calc.enter(3)
       calc.enter('*')
       assert_equal(12, calc.display())
-      assert(calc.display().integer?)
    end
 
    def test_float_multiply
@@ -55,7 +52,6 @@ class TestRpnCalc < Test::Unit::TestCase
       calc.enter(3.0)
       calc.enter('*')
       assert_equal(12.0, calc.display())
-      assert(calc.display().is_a?(Numeric) && !calc.display().integer?)
    end
 
    def test_divide
@@ -64,7 +60,6 @@ class TestRpnCalc < Test::Unit::TestCase
       calc.enter(6)
       calc.enter('/')
       assert_equal(2.0, calc.display())
-      assert(calc.display().is_a?(Numeric) && !calc.display().integer?)
    end
 
    def test_multiple_operations
