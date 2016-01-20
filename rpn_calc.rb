@@ -1,4 +1,11 @@
 class RpnCalc
+   # RpnCalc takes input from STDIN
+   #    in the format:
+   #    operand [enter]
+   #    operand [enter]
+   #    operator [enter]
+   #
+   #    outputs result of calculation
 
    # map operators to the actual methods they call 
    OPERATOR_METHOD = Hash["+" => "+", "-" => "-", "*" => "*", "/" => "fdiv"]
@@ -8,6 +15,7 @@ class RpnCalc
    end
 
    def display()
+      # show next element queued to pop, does not alter stack
       return @stack.last || 0
    end
 
